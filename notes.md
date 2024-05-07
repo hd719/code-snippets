@@ -49,3 +49,17 @@
   1. layout="fill" - stretches the image to the container size
   2. Using a local image, dimensions are taken from the imported image (like above)
   3. Assigning a width and height to the image will override the imported image dimensions
+
+## Server Actions (async functions)
+
+- Number 1 way to change data in a next app
+- Super close integration with HTML forms
+- Server actions are functions that will be called with the values a user entered into a form
+- Will run when the user submits a form
+- Can be used to send data to a server, save data to a database, or send an email
+- Server actions are defined in the same file as the form
+
+```jsx
+'use server';
+```
+
