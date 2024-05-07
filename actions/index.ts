@@ -24,31 +24,44 @@ export async function createSnippet(
   // This needs to be a server action
   // "use server"; // This is a server action, it will be run on the server
 
-  // Check the user's input and make sure its valid
-  const title = formData.get("title");
-  const code = formData.get("code");
+  try {
+    // Check the user's input and make sure its valid
+    const title = formData.get("title");
+    const code = formData.get("code");
 
-  if (typeof title !== "string" || title.length < 3) {
-    return {
-      message: "title must be at least 3 characters long",
-    };
+    if (typeof title !== "string" || title.length < 3) {
+      return {
+        message: "title must be at least 3 characters long",
+      };
+    }
+
+    if (typeof code !== "string" || code.length < 3) {
+      return {
+        message: "code must be at least 3 characters long",
+      };
+    }
+
+    // Take the user input and create a new record in the db
+    const snippet = await db.snippet.create({
+      data: {
+        title,
+        code,
+      },
+    });
+
+    console.log("Created new snippet", snippet);
+  } catch (err: unknown) {
+    console.error("Failed to create snippet", err);
+    if (err instanceof Error) {
+      return {
+        message: err.message,
+      };
+    } else {
+      return {
+        message: "Something went wrong",
+      };
+    }
   }
-
-  if (typeof code !== "string" || code.length < 3) {
-    return {
-      message: "code must be at least 3 characters long",
-    };
-  }
-
-  // Take the user input and create a new record in the db
-  const snippet = await db.snippet.create({
-    data: {
-      title,
-      code,
-    },
-  });
-
-  console.log("Created new snippet", snippet);
 
   // Redirect the user to the new snippet's page
   redirect("/");

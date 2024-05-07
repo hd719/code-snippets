@@ -113,3 +113,7 @@ async function createSnippet(formData: FormData) {
 
 - NextJS provides a built-in 404 page
 - In this case we put it in the [id] directory this will be the 404 page for the snippets, next js finds the closest 404 page to the route
+
+## Redirect()
+
+- Do not put these in try catch blocks because the catch block will think the redirect is an error
