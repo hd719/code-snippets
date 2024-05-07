@@ -21,26 +21,35 @@ export async function createSnippet(
   formState: { message: string },
   formData: FormData
 ) {
-  return {
-    message: "This is a test message",
-  };
-  // // This needs to be a server action
-  // // "use server"; // This is a server action, it will be run on the server
+  // This needs to be a server action
+  // "use server"; // This is a server action, it will be run on the server
 
-  // // Check the user's input and make sure its valid
-  // const title = formData.get("title") as string;
-  // const code = formData.get("code") as string;
+  // Check the user's input and make sure its valid
+  const title = formData.get("title");
+  const code = formData.get("code");
 
-  // // Take the user input and create a new record in the db
-  // const snippet = await db.snippet.create({
-  //   data: {
-  //     title,
-  //     code,
-  //   },
-  // });
+  if (typeof title !== "string" || title.length < 3) {
+    return {
+      message: "title must be at least 3 characters long",
+    };
+  }
 
-  // console.log("Created new snippet", snippet);
+  if (typeof code !== "string" || code.length < 3) {
+    return {
+      message: "code must be at least 3 characters long",
+    };
+  }
 
-  // // Redirect the user to the new snippet's page
-  // redirect("/");
+  // Take the user input and create a new record in the db
+  const snippet = await db.snippet.create({
+    data: {
+      title,
+      code,
+    },
+  });
+
+  console.log("Created new snippet", snippet);
+
+  // Redirect the user to the new snippet's page
+  redirect("/");
 }
