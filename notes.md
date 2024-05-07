@@ -100,6 +100,7 @@ async function createSnippet(formData: FormData) {
 - Add `use client` to the top of the file to make it a client component
 - Cannot import server components into client components
 - Can import client components into server components
+- **Server actions cannot be called from client components** , however you can pass down server actions from server components to client components
 
 ## Next Server
 
