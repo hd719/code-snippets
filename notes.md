@@ -107,3 +107,8 @@ async function createSnippet(formData: FormData) {
 - On 1st request (initial load): Both server component and client component will be rendered as html (w/o js) **on the server** !!
 - Note: The client component only on initial request will be rendered on the server
 - On 2nd request: The NextJS server will look at the client components and will send the necessary JS to the client
+
+## Not Found
+
+- NextJS provides a built-in 404 page
+- In this case we put it in the [id] directory this will be the 404 page for the snippets, next js finds the closest 404 page to the route
