@@ -105,5 +105,5 @@ async function createSnippet(formData: FormData) {
 
 - Next server is a node server that runs your NextJS app
 - On 1st request (initial load): Both server component and client component will be rendered as html (w/o js) **on the server** !!
- - Note: The client component only on initial request will be rendered on the server
+- Note: The client component only on initial request will be rendered on the server
 - On 2nd request: The NextJS server will look at the client components and will send the necessary JS to the client
