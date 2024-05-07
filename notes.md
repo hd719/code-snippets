@@ -117,3 +117,21 @@ async function createSnippet(formData: FormData) {
 ## Redirect()
 
 - Do not put these in try catch blocks because the catch block will think the redirect is an error
+
+## Caching
+
+- Next has 4 types of caching
+  1. Data Cache
+  2. Route Cache
+  3. Request Memoization
+  4. Full Route Cache -> Default caching behavior
+
+```jsx
+export const dynamicRoute = 'force-dynamic'
+```
+
+### Control caching
+
+- Time base caching: stale-while-revalidate
+- On Demand caching: Forcibly purge a cached response
+- Disable caching: Do not do any caching
