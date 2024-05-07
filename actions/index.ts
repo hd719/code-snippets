@@ -9,11 +9,13 @@ export async function editSnippet(id: number, code: string) {
     data: { code },
   });
 
+  revalidatePath(`/snippets/${id}`);
   redirect(`/snippets/${id}`);
 }
 
 export async function deleteSnippet(id: number) {
   await db.snippet.delete({ where: { id } });
+
   revalidatePath("/");
   redirect("/");
 }

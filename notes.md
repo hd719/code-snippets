@@ -135,3 +135,18 @@ export const dynamicRoute = 'force-dynamic'
 - Time base caching: stale-while-revalidate
 - On Demand caching: Forcibly purge a cached response
 - Disable caching: Do not do any caching
+
+### generateStaticParams()
+
+```jsx
+// Only happens in production
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany();
+
+  return snippets.map((snippet) => {
+    return {
+      id: snippet.id.toString(),
+    };
+  });
+}
+```
