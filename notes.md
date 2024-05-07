@@ -61,5 +61,49 @@
 
 ```jsx
 'use server';
+
+async function createSnippet(formData: FormData) {
+  // This needs to be a server action
+  "use server"; // This is a server action, it will be run on the server
+
+  // Check the user's input and make sure its valid
+  const title = formData.get("title") as string;
+  const code = formData.get("code") as string;
+
+  // Take the user input and create a new record in the db
+  const snippet = await db.snippet.create({
+    data: {
+      title,
+      code,
+    },
+  });
+
+  console.log("Created new snippet", snippet);
+
+  // Redirect the user to the new snippet's page
+  redirect("/");
+}
 ```
 
+## Server Components
+
+- Run on the server
+- Functions that return jsx
+- By default all components are server components (mostly used, better UX and better performance)
+- Cannot use hooks and cannot attach event handlers
+- Can use async/await directly in the functions or 3rd party state management libraries
+
+## Client Components
+
+- Run on the client
+- Run hooks, use state, use effect, etc.
+- Add `use client` to the top of the file to make it a client component
+- Cannot import server components into client components
+- Can import client components into server components
+
+## Next Server
+
+- Next server is a node server that runs your NextJS app
+- On 1st request (initial load): Both server component and client component will be rendered as html (w/o js) **on the server** !!
+ - Note: The client component only on initial request will be rendered on the server
+- On 2nd request: The NextJS server will look at the client components and will send the necessary JS to the client
